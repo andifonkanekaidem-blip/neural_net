@@ -145,15 +145,10 @@ void NN::back_propagate(_data outputs,_data&& target)
                 
                 Mat grad_n = err_signal_n / Mat(std::move(n_inter));
                 
-                /* std::cout << "Initial Weights\n";
-                std::cout <<*data_fp.at(i).weights_mat <<"\n";
-
-                std::cout << "Gradients\n";
-                std::cout <<grad_n <<"\n"; */
+                
                 optimizer.step(data_fp.at(i).weights_mat,data_fp.at(i).bias_mat,grad_n,err_signal_n,i);
                 
-                /* std::cout << "Final  Weights\n";
-                std::cout <<*data_fp.at(i).weights_mat <<"\n"; */
+                
                 prev_err_signal = err_signal_n;
                 data_fp.at(i+1).weights_mat->transpose();
                 data_fp.at(i).input_mat->transpose();
